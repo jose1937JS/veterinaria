@@ -15,7 +15,18 @@ class Modelo extends CI_Model {
 
 	public function buscar($param)
 	{
-		$this->db->where('');
-		$this->db->get('')
+		// super consulta para traer todo por inner joins
+		return $this->db->get();
+	}
+
+	public function insertar($data)
+	{
+		$this->db->insert('mascotas', $data['mascota']);
+		$this->db->insert('duenios', $data['duenio']);
+	}
+
+	public function eliminar($id)
+	{
+		$this->db->delete('mascotas', $id);
 	}
 }

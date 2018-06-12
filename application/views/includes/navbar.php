@@ -13,11 +13,6 @@
     <!-- Collapsible content -->
     <div class="collapse navbar-collapse" id="basicExampleNav">
 
-        <form class="form-inline mr-auto">
-            <div class="md-form my-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="quiter sto de aqui" aria-label="Search">
-            </div>
-        </form>
         <!-- Links -->
         <ul class="navbar-nav">
             <li class="nav-item">

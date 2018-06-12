@@ -2,15 +2,16 @@
 	<div class="card mb-4">
 		<div class="card-body">
 			<div class="row">
-				<div class="col-sm-3">
-					<div class="md-form">
-						<input type="text" name="" id="search" class="form-control">
+				<div class="col-sm-4">
+					<form class="md-form" id="buscarform">
+						<i class="fa fa-search prefix"></i>
+						<input type="text" name="" id="search" class="form-control" data-toggle="tooltip" title="enter para enviar">
 						<label for="search">Buscar mascota</label>
-					</div>
+					</form>
 				</div>
-				<div class="col col-sm-offset-4">
-					<button class="btn btn-danger" data-toggle="tooltip" title="Generar reporte PDF">
-						<i class="fa fa-pdf-o">PDF</i>
+				<div class="col offset-sm-6">
+					<button class="btn btn-danger mt-4" data-toggle="tooltip" title="Generar reporte PDF">
+						<i class="fa fa-file-pdf-o"></i>
 					</button>
 				</div>
 			</div>
