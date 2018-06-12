@@ -1,28 +1,59 @@
 <div class="container">
-	<table class="table table-bordered">
-		<thead>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
-		</thead>
-		<tbody>
-			
-		</tbody>
-	</table>
+	<div class="card mb-4">
+		<div class="card-body">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia blanditiis magnam libero sunt quaerat pariatur doloribus voluptatum soluta odit impedit doloremque corporis nemo nam, velit cupiditate culpa. Eos, dolor, expedita.
+		</div>
+	</div>
+	<div class="card">
+		<div class="card-body">
+			<table class="table table-hoverable">
+				<thead>
+					<th>Mascota</th>
+					<th>Dueño</th>
+					<th>Enfermedad</th>
+					<th>lo q sea</th>
+					<th>sdadad</th>
+				</thead>
+				<tbody>
+					<tr>
+						<td>asdasd</td>
+						<td>asdsd</td>
+						<td>sadasdasdas</td>
+						<td>asdsadasda</td>
+						<td>asdsasdaaaaasds</td>
+					</tr>
+					<tr>
+						<td>asdasd</td>
+						<td>asdsd</td>
+						<td>sadasdasdas</td>
+						<td>asdsadasda</td>
+						<td>asdsasdaaaaasds</td>
+					</tr>
+					<tr>
+						<td>asdasd</td>
+						<td>asdsd</td>
+						<td>sadasdasdas</td>
+						<td>asdsadasda</td>
+						<td>asdsasdaaaaasds</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
 
 <div class="modal fade" id="modal-registro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
-                <h4 class="modal-title w-100 font-weight-bold">Registrar</h4>
+                <h4 class="modal-title w-100 font-weight-bold">Registrar Mascota</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 	        <form id="ingresar">
 	            <div class="modal-body mx-3">
+	            	<h4>Datos de la mascota</h4>
 	            	<div class="row">
 	            		<div class="col-sm-4">
 	            			<div class="md-form">
@@ -32,14 +63,74 @@
 	            			</div>
 	            		</div>
 	            		<div class="col-sm-4">
-	            			<select class="mdb-select colorful-select dropdown-primary">
-	            				<option value="Perro">Perro</option>
-	            				<option value="Gato">Gato</option>
-	            				<option value="Leon">Leó</option>
-	            				<option value="Mariposa">Mariposa</option>
-	            				<option value="Dinosaurio">Dinosaurio</option>
-	            			</select>
-	            			<label>Selecciona la especie</label>
+	            			<div class="md-form">
+	            				<i class="fa fa-envelope prefix"></i>
+	            				<input type="text" id="especie" class="form-control">
+	            				<label for="especie">Especie de mascota</label>
+	            			</div>
+	            		</div>
+	            		<div class="col-sm-4">
+	            			<div class="md-form">
+	            				<i class="fa fa-envelope prefix"></i>
+	            				<input type="text" id="raza" class="form-control">
+	            				<label for="raza">Raza</label>
+	            			</div>
+	            		</div>
+	            	</div>
+	            	<div class="row">
+	            		<div class="col-sm-4">
+	            			<div class="md-form">
+	            				<i class="fa fa-envelope prefix"></i>
+	            				<input type="text" id="peso" class="form-control">
+	            				<label for="peso">Peso</label>
+	            			</div>
+	            		</div>
+	            		<div class="col">
+            				<div class="md-form">
+            					<i class="fa fa-pencil prefix"></i>
+            					<textarea type="text" id="resumen" class="md-textarea form-control" rows="1"></textarea>
+            					<label for="resumen">Resumen del animal</label>
+            				</div>
+            			</div>
+	            	</div>
+	            	<h4>Datos del dueño</h4>
+	            	<div class="row">
+	            		<div class="col">
+	            			<div class="md-form">
+	            				<i class="fa fa-envelope prefix"></i>
+	            				<input type="text" id="cedula" class="form-control">
+	            				<label for="cedula">Cédula Dueño</label>
+	            			</div>
+	            		</div>
+	            		<div class="col">
+	            			<div class="md-form">
+	            				<i class="fa fa-envelope prefix"></i>
+	            				<input type="text" id="nombreduño" class="form-control">
+	            				<label for="nombreduño">Nombre Dueño</label>
+	            			</div>
+	            		</div>
+	            		<div class="col">
+	            			<div class="md-form">
+	            				<i class="fa fa-envelope prefix"></i>
+	            				<input type="text" id="apellidodueño" class="form-control">
+	            				<label for="apellidodueño">Apellido Dueño</label>
+	            			</div>
+	            		</div>
+	            	</div>
+	            	<div class="row">
+	            		<div class="col-sm-4">
+	            			<div class="md-form">
+	            				<i class="fa fa-envelope prefix"></i>
+	            				<input type="text" id="telefono" class="form-control">
+	            				<label for="telefono">Teléfono Dueño</label>
+	            			</div>
+	            		</div>
+	            		<div class="col">
+	            			<div class="md-form">
+	            				<i class="fa fa-envelope prefix"></i>
+	            				<input type="text" id="direccion" class="form-control">
+	            				<label for="direccion">Dirección Dueño</label>
+	            			</div>
 	            		</div>
 	            	</div>
 	            </div>
@@ -52,5 +143,7 @@
 </div>
 
 <div class="text-center">
-    <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modal-registro">Launch Modal Register Form</a>
+    <a href="" class="btn btn-primary btn-floating" data-toggle="modal" data-target="#modal-registro">
+    	<i class="fa fa-plus"></i>
+    </a>
 </div>
