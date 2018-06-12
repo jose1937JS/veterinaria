@@ -20,12 +20,19 @@ class AjaxController extends CI_Controller {
 
 	public function index()
 	{
-
 		$this->load->view('includes/header');
 		$this->load->view('includes/navbar');
 		$this->load->view('inicio');
 		$this->load->view('includes/footer');
 	}
 
+	public function buscar($param)
+	{
+		$result['busqueda'] = $this->modelo->buscar($param);
 
+		$this->load->view('includes/header');
+		$this->load->view('includes/navbar');
+		$this->load->view('incio', $result);
+		$this->load->view('includes/footer');
+	}
 }

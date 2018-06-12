@@ -1,7 +1,19 @@
 <div class="container">
 	<div class="card mb-4">
 		<div class="card-body">
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia blanditiis magnam libero sunt quaerat pariatur doloribus voluptatum soluta odit impedit doloremque corporis nemo nam, velit cupiditate culpa. Eos, dolor, expedita.
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="md-form">
+						<input type="text" name="" id="search" class="form-control">
+						<label for="search">Buscar mascota</label>
+					</div>
+				</div>
+				<div class="col col-sm-offset-4">
+					<button class="btn btn-danger" data-toggle="tooltip" title="Generar reporte PDF">
+						<i class="fa fa-pdf-o">PDF</i>
+					</button>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="card">

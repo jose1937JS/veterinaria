@@ -13,4 +13,9 @@ class Modelo extends CI_Model {
 		return $this->db->get('usuarios');
 	}
 
+	public function buscar($param)
+	{
+		$this->db->where('');
+		$this->db->get('')
+	}
 }
