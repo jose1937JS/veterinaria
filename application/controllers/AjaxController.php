@@ -1,11 +1,20 @@
 <?php
 
 class AjaxController extends CI_Controller {
+	
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->helper(['url']);
 		$this->load->model('modelo');
+	}
+
+	public function index()
+	{
+		$this->load->view('includes/header');
+		$this->load->view('includes/navbar');
+		$this->load->view('inicio');
+		$this->load->view('includes/footer');
 	}
 
 	public function login()
@@ -18,12 +27,17 @@ class AjaxController extends CI_Controller {
 		$this->load->view('');
 	}
 
-	public function index()
+	public function insertar()
 	{
-		$this->load->view('includes/header');
-		$this->load->view('includes/navbar');
-		$this->load->view('inicio');
-		$this->load->view('includes/footer');
+		$data['mascota'] = array(
+
+		);
+
+		$data['duenio'] = array(
+
+		);
+		
+		$this->modelo->insertar($data);
 	}
 
 	public function buscar($param)

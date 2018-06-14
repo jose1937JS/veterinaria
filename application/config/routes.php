@@ -51,10 +51,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'login';
 
-$route['admin'] 		  = '';
-$route['registrar'] 	  = '';
-$route['eliminar/(:num)'] = '';
-$route['editar/(:num)']   = '';
+$route['admin'] 			 = 'AjaxController';
+$route['registrar'] 		 = 'AjaxController/insertar';
+$route['eliminar/(:num)']    = 'AjaxController/eliminar/$1';
+$route['editar/(:num)'] 	 = 'AjaxController/editar/$1';
+$route['informacion/(:num)'] = 'AjaxController/informacion/$1';
 //$route[''] 				  = '';
 
 $route['404_override'] = '';

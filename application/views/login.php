@@ -1,26 +1,55 @@
-<section class="form-dark">
-	<div class="card card-image" style="background-image: url('https://zoovetesmipasion.com/wp-content/uploads/2017/01/am_79227_4566536_426492.jpg')">
-		<div class="text-white rgba-stylish-strong py-5 px-5 z-depth-4">
-			<!-- header -->
-			<div class="text-center">
-				<h3 class="white-text mb-5 mt-4 font-wight-bold">
-					<strong>INICIAR SESION</strong>
-				</h3>
-			</div>
-			<!-- body -->
-			<div class="md-form">
-				<input type="text" name="user" id="user" class="form-control white-text">
-				<label for="user">Usuario</label>
-			</div>
-			<div class="md-form pb-3">
-				<input type="password" id="pass" name="pass" class="form-control white-text">
-				<label for="pass">Contraseña</label>
-			</div>
-			<!-- grid row -->
-			<div class="text-center mb-3 col-md-12">
-				<button type="button" class="btn btn-success btn-block btn-rounded z-depth-1">Entrar</button>
-			</div>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>LOGIN</title>
+	<link rel="stylesheet" href="<?= base_url() ?>/application/assets/mdb/mdb.min.css">
+	<style>
+		
+		body {
+			background: url('<?= base_url() ?>/application/assets/images/fondologin.jpg') !important;
+			background-position: center !important; 
+			background-attachment: fixed !important;
+			background-size: 125% !important; 
+		}
+	</style>
+</head>
+<body>
+	
+	<div class="login">
 
-		</div>
-	</div>
-</section>
+        <div class="card">
+            <div class="card-body">
+
+                <!--Header-->
+                <div class="form-header info-color">
+                    <h3><i class="fa fa-lock"></i> Inicio de Sesión</h3>
+                </div>
+
+                <!--Body-->
+                <div class="md-form">
+                    <i class="fa fa-user prefix grey-text"></i>
+                    <input type="text" id="usuario" class="form-control">
+                    <label for="usuario">Usuario</label>
+                </div>
+
+                <div class="md-form">
+                    <i class="fa fa-lock prefix grey-text"></i>
+                    <input type="password" id="clave" class="form-control">
+                    <label for="clave">Contraseña</label>
+                </div>
+
+                <div class="text-center">
+                    <button class="btn btn-info waves-effect waves-light">Login</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+	<script src="<?= base_url() ?>/application/assets/jquery-3.2.1.min.js"></script>
+	<script src="<?= base_url() ?>/application/assets/mdb/mdb.min.js"></script>
+	<script src="<?= base_url() ?>/application/assets/app.js"></script>
+</body>
+</html>

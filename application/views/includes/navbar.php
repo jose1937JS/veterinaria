@@ -1,8 +1,10 @@
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark primary-color mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark primary-color px-3 fixed-top">
 
     <!-- Navbar brand -->
-    <a class="navbar-brand" href="#">Veterinaria</a>
+    <a class="navbar-brand" href="#">
+        <img src="<?= base_url() ?>/application/assets/images/LogoVeterinaria.png" class="logo">
+    </a>
 
     <!-- Collapse button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
@@ -14,7 +16,7 @@
     <div class="collapse navbar-collapse" id="basicExampleNav">
 
         <!-- Links -->
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a class="nav-link" href="#">Inicio
                     <span class="sr-only">(current)</span>

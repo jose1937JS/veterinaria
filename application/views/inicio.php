@@ -1,7 +1,7 @@
-<div class="container">
-	<div class="card mb-4">
+<div class="container" style="margin-top: 100px">
+	<div class="card mb-4 ">
 		<div class="card-body">
-			<div class="row">
+			<div class="row d-flex justify-content-between" >
 				<div class="col-sm-4">
 					<form class="md-form" id="buscarform">
 						<i class="fa fa-search prefix"></i>
@@ -9,7 +9,7 @@
 						<label for="search">Buscar mascota</label>
 					</form>
 				</div>
-				<div class="col offset-sm-6">
+				<div class="col-sm-2">
 					<button class="btn btn-danger mt-4" data-toggle="tooltip" title="Generar reporte PDF">
 						<i class="fa fa-file-pdf-o"></i>
 					</button>
@@ -17,15 +17,16 @@
 			</div>
 		</div>
 	</div>
-	<div class="card">
+	<div class="card mb-4">
 		<div class="card-body">
 			<table class="table table-hoverable">
 				<thead>
-					<th>Mascota</th>
-					<th>Dueño</th>
-					<th>Enfermedad</th>
-					<th>lo q sea</th>
-					<th>sdadad</th>
+					<th>MASCOTA</th>
+					<th>RAZA</th>
+					<th>ENFERMEDAD</th>
+					<th>DUEÑO</th>
+					<th>TELEFONO</th>
+					<th class="text-center">ACCIONES</th>
 				</thead>
 				<tbody>
 					<tr>
@@ -34,21 +35,60 @@
 						<td>sadasdasdas</td>
 						<td>asdsadasda</td>
 						<td>asdsasdaaaaasds</td>
+						<td class="text-center">
+							<button class="btn btn-info px-3 py-2" data-toggle="tooltip" title="Información"><i class="fa fa-info"></i></button>
+							<button class="btn btn-danger px-3 py-2" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></button>
+						</td>
 					</tr>
+
 					<tr>
 						<td>asdasd</td>
 						<td>asdsd</td>
 						<td>sadasdasdas</td>
 						<td>asdsadasda</td>
 						<td>asdsasdaaaaasds</td>
+						<td class="text-center">
+							<button class="btn btn-info px-3 py-2" data-toggle="tooltip" title="Información"><i class="fa fa-info"></i></button>
+							<button class="btn btn-danger px-3 py-2" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></button>
+						</td>
 					</tr>
+
 					<tr>
 						<td>asdasd</td>
 						<td>asdsd</td>
 						<td>sadasdasdas</td>
 						<td>asdsadasda</td>
 						<td>asdsasdaaaaasds</td>
+						<td class="text-center">
+							<button class="btn btn-info px-3 py-2" data-toggle="tooltip" title="Información"><i class="fa fa-info"></i></button>
+							<button class="btn btn-danger px-3 py-2" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></button>
+						</td>
 					</tr>
+
+					<tr>
+						<td>asdasd</td>
+						<td>asdsd</td>
+						<td>sadasdasdas</td>
+						<td>asdsadasda</td>
+						<td>asdsasdaaaaasds</td>
+						<td class="text-center">
+							<button class="btn btn-info px-3 py-2" data-toggle="tooltip" title="Información"><i class="fa fa-info"></i></button>
+							<button class="btn btn-danger px-3 py-2" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></button>
+						</td>
+					</tr>
+
+					<tr>
+						<td>asdasd</td>
+						<td>asdsd</td>
+						<td>sadasdasdas</td>
+						<td>asdsadasda</td>
+						<td>asdsasdaaaaasds</td>
+						<td class="text-center">
+							<button class="btn btn-info px-3 py-2" data-toggle="tooltip" title="Información"><i class="fa fa-info"></i></button>
+							<button class="btn btn-danger px-3 py-2" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></button>
+						</td>
+					</tr>
+					
 				</tbody>
 			</table>
 		</div>
