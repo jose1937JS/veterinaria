@@ -49,14 +49,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'login';
+$route['default_controller'] 		= 'login';
 
-$route['admin'] 			 = 'AjaxController';
-$route['registrar'] 		 = 'AjaxController/insertar';
-$route['eliminar/(:num)']    = 'AjaxController/eliminar/$1';
-$route['editar/(:num)'] 	 = 'AjaxController/editar/$1';
-$route['informacion/(:num)'] = 'AjaxController/informacion/$1';
-//$route[''] 				  = '';
+$route['admin'] 			    	= 'AjaxController';
+$route['registrar'] 		    	= 'AjaxController/insertar';
+$route['eliminar/(:num)']       	= 'AjaxController/eliminar/$1';
+$route['actualizar-mascota/(:num)'] = 'AjaxController/editar_mascota/$1';
+$route['actualizar-duenio/(:num)']  = 'AjaxController/editar_duenio/$1';
+$route['informacion/(:num)']    	= 'AjaxController/informacion/$1';
+$route['busqueda'] 			    	= 'AjaxController/buscar';
+$route['historial/(:num)']			= 'AjaxController/historial/$1';
 
-$route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+$route['404_override'] 				= '';
+$route['translate_uri_dashes']  	= FALSE;

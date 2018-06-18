@@ -18,16 +18,14 @@
         <!-- Links -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Inicio
-                    <span class="sr-only">(current)</span>
-                </a>
+                <?= anchor('admin', '<i class="fa fa-home"></i> Inicio', 'class="nav-link"') ?>
             </li>
 
             <!-- Dropdown -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">sesion</a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Salir</a>
+                   <?= anchor('Login/logout', 'Cerrar Sesión', 'class="dropdown-item"') ?>
                 </div>
             </li>
 

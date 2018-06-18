@@ -22,27 +22,28 @@
             <div class="card-body">
 
                 <!--Header-->
-                <div class="form-header info-color">
-                    <h3><i class="fa fa-lock"></i> Inicio de Sesión</h3>
-                </div>
+                <?= form_open('Login/login') ?>
+                    <div class="form-header info-color">
+                        <h3><i class="fa fa-lock"></i> Inicio de Sesión</h3>
+                    </div>
 
-                <!--Body-->
-                <div class="md-form">
-                    <i class="fa fa-user prefix grey-text"></i>
-                    <input type="text" id="usuario" class="form-control">
-                    <label for="usuario">Usuario</label>
-                </div>
+                    <!--Body-->
+                    <div class="md-form">
+                        <i class="fa fa-user prefix grey-text"></i>
+                        <input type="text" id="usuario" name="user" class="form-control" required>
+                        <label for="usuario">Usuario</label>
+                    </div>
 
-                <div class="md-form">
-                    <i class="fa fa-lock prefix grey-text"></i>
-                    <input type="password" id="clave" class="form-control">
-                    <label for="clave">Contraseña</label>
-                </div>
+                    <div class="md-form">
+                        <i class="fa fa-lock prefix grey-text"></i>
+                        <input type="password" id="clave" name="pass" class="form-control" required>
+                        <label for="clave">Contraseña</label>
+                    </div>
 
-                <div class="text-center">
-                    <button class="btn btn-info waves-effect waves-light">Login</button>
-                </div>
-
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-info waves-effect waves-light">Login</button>
+                    </div>
+                </form>
             </div>
         </div>
 
