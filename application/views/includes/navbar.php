@@ -21,6 +21,10 @@
                 <?= anchor('admin', '<i class="fa fa-home"></i> Inicio', 'class="nav-link"') ?>
             </li>
 
+            <li class="nav-item">
+                <?= anchor('mensajes', '<i class="fa fa-envelope"></i> Mensajes', 'class="nav-link"') ?>
+            </li>
+
             <!-- Dropdown -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">sesion</a>

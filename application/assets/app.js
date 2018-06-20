@@ -60,4 +60,18 @@ $(function(){
 		$('#sex').removeAttr('disabled');
 	});
 
+
+	// $('#respuestaform').submit(function(e){
+	// 	e.preventDefault();
+
+
+	// 	let msg = $('#msg').val();
+	// 	let id = $('#id').val();
+		
+	// 	document.write(msg, id);
+
+	// 	$.post("http://127.0.0.1/JFLO/veterinaria/index.php/", { respuesta : msg, id : id });
+	// 	$('#msg').val('');
+	// });
+
 })

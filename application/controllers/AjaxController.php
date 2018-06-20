@@ -8,6 +8,7 @@ class AjaxController extends CI_Controller {
 		$this->load->helper(['url', 'form']);
 		$this->load->library('session');
 		$this->load->model('modelo');
+		$this->load->database();
 	}
 
 	public function index()
@@ -104,10 +105,52 @@ class AjaxController extends CI_Controller {
 		$this->modelo->eliminar($id);
 	}
 
+	public function usuario()
+	{
+		if ($this->session->userdata('usuario'))
+		{
+			$usuario = $this->session->userdata('usuario');
+
+			$ced = $this->db->select('cedula')
+							->get_where('usuarios', ['usuario' => $usuario]);
+
+			$dat['idusu'] = $this->db->select('id')
+							->get_where('usuarios', ['cedula' => $ced->result()[0]->cedula]);
+
+
+			$data['mensajes'] = $this->modelo->get_mensajes_user($dat['idusu']->result()[0]->id);
+			$data['idusu'] 	  = $dat['idusu']->result()[0]->id;
+
+			// var_dump($usuario);exit();
+
+			$this->load->view('includes/header');
+			$this->load->view('usuario', $data);
+			$this->load->view('includes/footer');
+		}
+		else {
+			redirect('');
+		}
+	}
+	public function aniadir_usuario()
+	{
+		$data = [
+			'nombre' => $this->input->post('nombre'),
+			'apellido' => $this->input->post('apellido'),
+			'cedula' => $this->input->post('cedula'),
+			'telefono' => $this->input->post('telefono'),
+			'direccion' => $this->input->post('direccion'),
+			'usuario' => $this->input->post('usuario'),
+			'clave' => $this->input->post('clave')
+		];
+
+		$this->modelo->aniadir_user($data);
+		redirect('');
+	}
+
 	public function historial($id)
 	{
 		$data = [
-			'fecha_salida'  => date("l d F o H:i:s"), // Sunday 17 June 2018 14:28:20
+			'fecha_salida'  => date('d/m/o'),
 			'veterinario'   => $this->input->post('veterinario'),
 			'pulso'		    => $this->input->post('pulso'),
 			'temperatura'   => $this->input->post('temp'),
@@ -125,5 +168,42 @@ class AjaxController extends CI_Controller {
 		$this->load->view('includes/header');
 		$this->load->view('pdf', $infor);
 		$this->load->view('includes/footer');
+	}
+
+	public function mensajes()
+	{
+		if ($this->session->userdata('usuario') == 'admin')
+		{
+			$msg['mensajes'] = $this->modelo->get_mensajes_admin();
+
+			$this->load->view('includes/header');
+			$this->load->view('includes/navbar');
+			$this->load->view('mensajes', $msg);
+			$this->load->view('includes/footer');
+		}
+		else {
+			redirect('');
+		}
+	}
+
+	public function enviarmensaje()
+	{
+		$mensaje = [
+			'mensaje' => $this->input->post('msg'),
+			'id_usuario' => $this->input->post('idusu')
+		];
+
+		$this->db->insert('mensajes', $mensaje);
+		redirect('usuario');
+	}
+
+	public function respuesta()
+	{
+		$id = $this->input->post('id');
+
+		$this->db->where('id', $id);
+		$this->db->update('mensajes', ['respuesta' => $this->input->post('respuesta')]);
+
+		redirect('mensajes');
 	}
 }

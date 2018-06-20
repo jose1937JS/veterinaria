@@ -217,7 +217,7 @@
 							<div class="md-form">
 								<i class="fa fa-heartbeat prefix"></i>
 								<input type="text" class="form-control validate" name="pulso" id="pulso">
-								<label for="pulso">Pulso</label>
+								<label for="pulso">Pulso puls/min</label>
 							</div>
 						</div>
 						<div class="col-sm">
@@ -231,7 +231,7 @@
 							<div class="md-form">
 								<i class="fa fa-balance-scale prefix"></i>
 								<input type="text" class="form-control validate" name="peso" id="peso">
-								<label for="peso">Peso</label>
+								<label for="peso">Peso Kg</label>
 							</div>
 						</div>
 					</div>

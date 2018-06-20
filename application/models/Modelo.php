@@ -8,9 +8,9 @@ class Modelo extends CI_Model {
 		$this->load->database();
 	}
 
-	public function login()
+	public function login($user)
 	{
-		return $this->db->get('usuarios');
+		return $this->db->get_where('usuarios', ['usuario' => $user]);
 	}
 
 	public function get_all()
@@ -28,7 +28,7 @@ class Modelo extends CI_Model {
 		$this->db->where('id', $id);
 		$this->db->update('mascotas', ['deAlta' => 'true']);
 
-		return $this->db->select('mascotas.id as mascoid, mascotas.nombre, mascotas.sexo, mascotas.edad, mascotas.tipo, mascotas.color, mascotas.vacunas, mascotas.raza, mascotas.resumen, mascotas.id_duenio, duenios.id as dueid, duenios.nombre as duename, duenios.apellido, duenios.cedula, duenios.telefono, duenios.direccion, historial.id as histoid, historial.fecha_entrada, historial.fecha_salida, historial.veterinario, historial.pulso, historial.peso, historial.temperatura, historial.actitud, historial.cond_corporal, historial.hidratacion, historial.observacion')
+		return $this->db->select('mascotas.id as mascoid, mascotas.nombre, mascotas.deAlta, mascotas.sexo, mascotas.edad, mascotas.tipo, mascotas.color, mascotas.vacunas, mascotas.raza, mascotas.resumen, mascotas.id_duenio, duenios.id as dueid, duenios.nombre as duename, duenios.apellido, duenios.cedula, duenios.telefono, duenios.direccion, historial.id as histoid, historial.fecha_entrada, historial.fecha_salida, historial.veterinario, historial.pulso, historial.peso, historial.temperatura, historial.actitud, historial.cond_corporal, historial.hidratacion, historial.observacion')
 					->from('historial')
 						->join('mascotas', 'mascotas.id = historial.id_mascota')
 						->join('duenios', 'duenios.id = mascotas.id_duenio')
@@ -36,9 +36,23 @@ class Modelo extends CI_Model {
 			->get();
 	}
 
+	public function get_mensajes_admin()
+	{
+		return $this->db->select('mensajes.id, mensajes.mensaje, mensajes.respuesta, mensajes.id_usuario, usuarios.nombre, usuarios.apellido')
+					->join('usuarios', 'id_usuario = usuarios.id')
+					->get('mensajes');
+	}
+
+	public function get_mensajes_user($id)
+	{
+		return $this->db->select('mensajes.id, mensajes.mensaje, mensajes.respuesta, mensajes.id_usuario, usuarios.nombre, usuarios.apellido, usuarios.cedula')
+					->join('usuarios', 'id_usuario = usuarios.id')
+					->get_where('mensajes', ['usuarios.id' => $id]);
+	}
+
 	public function buscar($param)
 	{
-		return $this->db->select('mascotas.id, mascotas.deALta, mascotas.nombre, mascotas.tipo, mascotas.edad, mascotas.raza, mascotas.color, duenios.nombre as duename, duenios.apellido, duenios.cedula, duenios.telefono')
+		return $this->db->select('mascotas.id, mascotas.deAlta, mascotas.nombre, mascotas.tipo, mascotas.edad, mascotas.raza, mascotas.color, duenios.nombre as duename, duenios.apellido, duenios.cedula, duenios.telefono')
 			->from('mascotas')
 				->join('duenios', 'mascotas.id_duenio = duenios.id')
 					->like('duenios.cedula', $param)
@@ -79,9 +93,14 @@ class Modelo extends CI_Model {
 
 		$this->db->insert('mascotas', $data['mascota']);
 		$this->db->insert('historial', [
-			'fecha_entrada' => date("l d F o (H - 1):i:s"), // Sunday 17 June 2018 14:28:20
+			'fecha_entrada' => date('d/m/o'),
 			'id_mascota'	=> $id_mascota
 		]);
+	}
+
+	public function aniadir_user($data)
+	{
+		$this->db->insert('usuarios', $data);
 	}
 
 	public function historial($data)
@@ -91,13 +110,16 @@ class Modelo extends CI_Model {
 
 	public function eliminar($id)
 	{
-		$iduenio = $this->db->query("select id_duenio from mascotas where id = $id")->result()[0]->id_duenio;
+		// $iduenio = $this->db->query("select id_duenio from mascotas where id = $id")->result()[0]->id_duenio
+
+		$this->db->where('id_mascota', $id);
+		$this->db->delete('historial');
 
 		$this->db->where('id' , $id);
 		$this->db->delete('mascotas');
 
-		$this->db->where('id', $iduenio);
-		$this->db->delete('duenios');
+		redirect('admin');
+
 	}
 
 	public function perfil($id)

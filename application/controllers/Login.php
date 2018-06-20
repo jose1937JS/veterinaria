@@ -21,17 +21,21 @@ class Login extends CI_Controller {
 	{
 		$this->load->model('modelo');
 		
-		$usersdb = $this->modelo->login();
-		$result  = $usersdb->result();
-
 		$user = $this->input->post('user');
 		$pass = $this->input->post('pass');
+		
+		$userdb = $this->modelo->login($user)->result();
 
-		if ( ($user == $result[0]->usuario && $pass == $result[0]->clave) ) {
+		if ( ($user == $userdb[0]->usuario && $pass == $userdb[0]->clave) ) {
 			$this->session->set_userdata('usuario', $user);
 
 			$path = $this->session->userdata('usuario');
-			redirect("$path");
+			if ($path == 'admin') {
+				redirect("admin");
+			}
+			else {
+				redirect("usuario");
+			}
 		}
 		else {
 			redirect('');
