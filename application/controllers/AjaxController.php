@@ -1,5 +1,14 @@
 <?php
 
+/* Perfi para el cliente v/
+ * Eliminar los mensajes v/
+ * Notificacion cunado llega un mensaje v/
+ * Que los datos del historial se guarden en la bd
+ * Generar reporte pdf genera - Reporte por rango
+ * QUe el cliente puda Aadir una mascota
+ *
+*/
+
 class AjaxController extends CI_Controller {
 	
 	function __construct()
@@ -16,9 +25,10 @@ class AjaxController extends CI_Controller {
 		if( $this->session->userdata('usuario') )
 		{
 			$data['mascotas'] = $this->modelo->get_all();
-			
+			$cant['cant']	  = $this->modelo->get_cant_msg('visto_admin');
+
 			$this->load->view('includes/header');
-			$this->load->view('includes/navbar');
+			$this->load->view('includes/navbar', $cant);
 			$this->load->view('inicio', $data);
 			$this->load->view('includes/footer');
 		}
@@ -50,6 +60,24 @@ class AjaxController extends CI_Controller {
 		$this->modelo->actualizar($formdatamascota, $id, $id_mascota, 'mascotas');
 	}
 
+	public function editar_mascota_perfil($id)
+	{
+		$formdatamascota = [
+			'nombre'  => $this->input->post('nombre'),
+			'edad'    => $this->input->post('edad'),
+			'tipo'	  => $this->input->post('tipo'),
+			'sexo'	  => $this->input->post('gen'),
+			'raza'	  => $this->input->post('raza'),
+			'color'	  => $this->input->post('color'),
+			'vacunas' => $this->input->post('vacuna')
+		];
+
+		$id_mascota = $this->input->post('id_mascota');
+
+		$this->modelo->actualizar($formdatamascota, $id, $id_mascota, 'mascotas');
+		redirect("http://127.0.0.1/JFLO/veterinaria/index.php/usuario/perfil/$id_mascota");
+	}
+
 	public function editar_duenio($id)
 	{
 		$formdataduenio = [
@@ -62,6 +90,22 @@ class AjaxController extends CI_Controller {
 		$id_mascota = $this->input->post('id_mascota');
 
 		$this->modelo->actualizar($formdataduenio, $id, $id_mascota, 'duenios');
+		redirect("http://127.0.0.1/JFLO/veterinaria/index.php/informacion/$id_mascota");
+	}
+
+	public function editar_duenio_perfil($id)
+	{
+		$formdataduenio = [
+			'nombre'    => $this->input->post('nombreduenio'),
+			'apellido'  => $this->input->post('apellido'),
+			'telefono'  => $this->input->post('telefono'),
+			'direccion' => $this->input->post('direccion')
+		];
+
+		$id_mascota = $this->input->post('id_mascota');
+
+		$this->modelo->actualizar($formdataduenio, $id, $id_mascota, 'duenios');
+		redirect("http://127.0.0.1/JFLO/veterinaria/index.php/usuario/perfil/$id_mascota");
 	}
 
 	public function buscar()
@@ -121,7 +165,9 @@ class AjaxController extends CI_Controller {
 			$data['mensajes'] = $this->modelo->get_mensajes_user($dat['idusu']->result()[0]->id);
 			$data['idusu'] 	  = $dat['idusu']->result()[0]->id;
 
-			// var_dump($usuario);exit();
+			$data['cant']	  = $this->modelo->get_cant_msg('visto_usuario');
+
+			$this->modelo->actualizarmsg('visto_usuario');
 
 			$this->load->view('includes/header');
 			$this->load->view('usuario', $data);
@@ -175,9 +221,12 @@ class AjaxController extends CI_Controller {
 		if ($this->session->userdata('usuario') == 'admin')
 		{
 			$msg['mensajes'] = $this->modelo->get_mensajes_admin();
+			$cant['cant']	 = $this->modelo->get_cant_msg('visto_admin');
+
+			$this->modelo->actualizarmsg('visto_admin');
 
 			$this->load->view('includes/header');
-			$this->load->view('includes/navbar');
+			$this->load->view('includes/navbar', $cant);
 			$this->load->view('mensajes', $msg);
 			$this->load->view('includes/footer');
 		}
@@ -206,4 +255,27 @@ class AjaxController extends CI_Controller {
 
 		redirect('mensajes');
 	}
+
+	public function perfil($id)
+	{
+		$data['info'] = $this->modelo->perfil($id)->result();
+		$data['id'] = $id;
+
+		$this->load->view('includes/header');
+		$this->load->view('perfilcliente', $data);
+		$this->load->view('includes/footer');
+	}
+
+	function eliminar_mensajes_user($id)
+	{
+		$this->modelo->eliminar_mensajes_user($id);
+		redirect('usuario');
+	}
+
+	function eliminar_mensajes_admin($id)
+	{
+		$this->modelo->eliminar_mensajes_user($id);
+		redirect('mensajes');
+	}
+
 }

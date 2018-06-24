@@ -49,19 +49,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] 		= 'login';
+$route['default_controller'] 			= 'login';
 
-$route['admin'] 			    	= 'AjaxController';
-$route['usuario'] 			    	= 'AjaxController/usuario';
-$route['registrar'] 		    	= 'AjaxController/insertar';
-$route['eliminar/(:num)']       	= 'AjaxController/eliminar/$1';
-$route['actualizar-mascota/(:num)'] = 'AjaxController/editar_mascota/$1';
-$route['actualizar-duenio/(:num)']  = 'AjaxController/editar_duenio/$1';
-$route['informacion/(:num)']    	= 'AjaxController/informacion/$1';
-$route['busqueda'] 			    	= 'AjaxController/buscar';
-$route['historial/(:num)']			= 'AjaxController/historial/$1';
-$route['mensajes']					= 'AjaxController/mensajes';
-$route['aniadir_usuario']			= 'AjaxController/aniadir_usuario';
+$route['admin'] 			    		= 'AjaxController';
+$route['usuario'] 			    		= 'AjaxController/usuario';
+$route['usuario/perfil/(:num)']	   		= 'AjaxController/perfil/$1';
+$route['registrar'] 		    		= 'AjaxController/insertar';
+$route['eliminar/(:num)']       		= 'AjaxController/eliminar/$1';
+$route['actualizar-mascota/(:num)'] 	= 'AjaxController/editar_mascota/$1';
+$route['actualizar_mascota/(:num)'] 	= 'AjaxController/editar_mascota_perfil/$1';
+$route['actualizar_duenio/(:num)']  	= 'AjaxController/editar_duenio_perfil/$1';
+$route['actualizar-duenio/(:num)']  	= 'AjaxController/editar_duenio/$1';
+$route['informacion/(:num)']    		= 'AjaxController/informacion/$1';
+$route['busqueda'] 			    		= 'AjaxController/buscar';
+$route['historial/(:num)']				= 'AjaxController/historial/$1';
+$route['mensajes']						= 'AjaxController/mensajes';
+$route['aniadir_usuario']				= 'AjaxController/aniadir_usuario';
+$route['eliminar_mensaje/(:num)']		= 'AjaxController/eliminar_mensajes_user/$1';
+$route['eliminar_mensaje_admin/(:num)']	= 'AjaxController/eliminar_mensajes_admin/$1';
 
-$route['404_override'] 				= '';
-$route['translate_uri_dashes']  	= FALSE;
+
+$route['404_override'] 					= '';
+$route['translate_uri_dashes']  		= FALSE;

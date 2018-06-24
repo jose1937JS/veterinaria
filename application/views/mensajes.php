@@ -5,7 +5,10 @@
 		
 		<div class="card mb-4">
 			<div class="card-body">
-				<h5 class="card-title"><?= $value->nombre.' '.$value->apellido ?><small> - Te ha ecrito un mensaje</small></h5>
+				<div class="d-flex justify-content-between">
+					<h5 class="card-title"><?= $value->nombre.' '.$value->apellido ?><small> - Te ha ecrito un mensaje</small></h5>
+					<?= anchor("eliminar_mensaje_admin/$value->id",'<i class="fa fa-times red-text"></i>') ?> 
+				</div>
 				<hr>
 				<?= $value->mensaje ?>
 			</div>

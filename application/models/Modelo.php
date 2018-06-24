@@ -40,6 +40,7 @@ class Modelo extends CI_Model {
 	{
 		return $this->db->select('mensajes.id, mensajes.mensaje, mensajes.respuesta, mensajes.id_usuario, usuarios.nombre, usuarios.apellido')
 					->join('usuarios', 'id_usuario = usuarios.id')
+					->order_by('id', 'desc')
 					->get('mensajes');
 	}
 
@@ -47,6 +48,7 @@ class Modelo extends CI_Model {
 	{
 		return $this->db->select('mensajes.id, mensajes.mensaje, mensajes.respuesta, mensajes.id_usuario, usuarios.nombre, usuarios.apellido, usuarios.cedula')
 					->join('usuarios', 'id_usuario = usuarios.id')
+					->order_by('id', 'desc')
 					->get_where('mensajes', ['usuarios.id' => $id]);
 	}
 
@@ -142,10 +144,24 @@ class Modelo extends CI_Model {
 		{
 			$this->db->where('id', $id);
 			$this->db->update($tabla, $formdata);
-			redirect("http://127.0.0.1/JFLO/veterinaria/index.php/informacion/$id_mascota");
+			
 		}
-		else {
-			redirect("http://127.0.0.1/JFLO/veterinaria/index.php/informacion/$id_mascota");
-		}
+	}
+
+	public function eliminar_mensajes_user($id)
+	{
+		$this->db->delete('mensajes', ['id' => $id]);
+	}
+
+	public function get_cant_msg($who)
+	{
+		$num = $this->db->query("SELECT COUNT(*) as num FROM mensajes WHERE $who = 0");
+		return $num->result()[0]->num;
+		// return $this->db->where($who, '0')->count_all_results('mensajes');
+	}
+
+	public function actualizarmsg($who)
+	{
+		$this->db->update('mensajes', [$who => 1]);
 	}
 }

@@ -20,9 +20,9 @@
             <li class="nav-item">
                 <?= anchor('admin', '<i class="fa fa-home"></i> Inicio', 'class="nav-link"') ?>
             </li>
-
+            <?php ($cant == 0)? $cant='' : $cant ?>
             <li class="nav-item">
-                <?= anchor('mensajes', '<i class="fa fa-envelope"></i> Mensajes', 'class="nav-link"') ?>
+                <?= anchor('mensajes', "<i class='fa fa-envelope'></i> Mensajes <span class='badge badge-danger'>$cant</span>", 'class="nav-link"') ?>
             </li>
 
             <!-- Dropdown -->

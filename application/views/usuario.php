@@ -17,8 +17,13 @@
 
         <!-- Links -->
         <ul class="navbar-nav ml-auto">
+            <?php ($cant == 0)? $cant='': $cant ?>
             <li class="nav-item">
-                <?= anchor('admin', '<i class="fa fa-home"></i> Inicio', 'class="nav-link"') ?>
+                <?= anchor('usuario', "<i class='fa fa-home'></i> Usuario <span class='badge badge-danger'>$cant</span>", 'class="nav-link"') ?>
+            </li>
+
+             <li class="nav-item">
+                <?= anchor("usuario/perfil/$idusu", '<i class="fa fa-home"></i> Perfil', 'class="nav-link"') ?>
             </li>
 
             <!-- Dropdown -->
@@ -44,8 +49,11 @@
 			<div class="container">
 				<div class="card mb-4">
 					<div class="card-body">
-						<h5 class="card-title"><?= $value->nombre.' '.$value->apellido ?></h5>
-						<hr>
+						<div class="d-flex justify-content-between">
+                            <h5 class="card-title"><?= $value->nombre.' '.$value->apellido ?></h5>
+                            <?= anchor("eliminar_mensaje/$value->id",'<i class="fa fa-times red-text"></i>') ?> 
+                        </div>
+                        <hr>
 						<?= $value->mensaje ?>
 					</div>
 					<div class="rounded-bottom grey lighten-2 p-3">
