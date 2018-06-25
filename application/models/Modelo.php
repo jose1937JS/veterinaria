@@ -25,9 +25,6 @@ class Modelo extends CI_Model {
 
 	public function get_historial($id)
 	{
-		$this->db->where('id', $id);
-		$this->db->update('mascotas', ['deAlta' => 'true']);
-
 		return $this->db->select('mascotas.id as mascoid, mascotas.nombre, mascotas.deAlta, mascotas.sexo, mascotas.edad, mascotas.tipo, mascotas.color, mascotas.vacunas, mascotas.raza, mascotas.resumen, mascotas.id_duenio, duenios.id as dueid, duenios.nombre as duename, duenios.apellido, duenios.cedula, duenios.telefono, duenios.direccion, historial.id as histoid, historial.fecha_entrada, historial.fecha_salida, historial.veterinario, historial.pulso, historial.peso, historial.temperatura, historial.actitud, historial.cond_corporal, historial.hidratacion, historial.observacion')
 					->from('historial')
 						->join('mascotas', 'mascotas.id = historial.id_mascota')
@@ -75,25 +72,47 @@ class Modelo extends CI_Model {
 			'direccion' => $this->input->post('direccion')
 		);
 
-		$this->db->insert('duenios', $data['duenio']);
+		$existDuenio = $this->db->get_where('duenios', ['cedula' => $data['duenio']['cedula']])->result();
 
-		$id_duenio = $this->db->query('select @@identity as id')->result()[0]->id;
+		if ( !empty($existDuenio[0]) )
+		{
+			$data['mascota'] = array(
+				'nombre'    => $this->input->post('nombremascota'),
+				'edad'		=> $this->input->post('edad'),
+				'tipo'      => $this->input->post('especie'),
+				'sexo'		=> $this->input->post('gen'),
+				'color'     => $this->input->post('color'),
+				'raza'      => $this->input->post('raza'),
+				'vacunas'   => $this->input->post('vacunas'),
+				'resumen'   => $this->input->post('resumen'),
+				'id_duenio' => $existDuenio[0]->id
+			);
 
-		$data['mascota'] = array(
-			'nombre'    => $this->input->post('nombremascota'),
-			'edad'		=> $this->input->post('edad'),
-			'tipo'      => $this->input->post('especie'),
-			'sexo'		=> $this->input->post('gen'),
-			'color'     => $this->input->post('color'),
-			'raza'      => $this->input->post('raza'),
-			'vacunas'   => $this->input->post('vacunas'),
-			'resumen'   => $this->input->post('resumen'),
-			'id_duenio' => $id_duenio
-		);
+			$this->db->insert('mascotas', $data['mascota']);
+			$id_mascota = $this->db->query('select @@identity as id')->result()[0]->id;
+		}
+		else
+		{
+			$this->db->insert('duenios', $data['duenio']);
+			$id_duenio  = $this->db->query('select @@identity as id')->result()[0]->id;
 
-		$id_mascota = $this->db->query('select @@identity as id')->result()[0]->id;
+			$data['mascota'] = array(
+				'nombre'    => $this->input->post('nombremascota'),
+				'edad'		=> $this->input->post('edad'),
+				'tipo'      => $this->input->post('especie'),
+				'sexo'		=> $this->input->post('gen'),
+				'color'     => $this->input->post('color'),
+				'raza'      => $this->input->post('raza'),
+				'vacunas'   => $this->input->post('vacunas'),
+				'resumen'   => $this->input->post('resumen'),
+				'id_duenio' => $id_duenio
+			);
 
-		$this->db->insert('mascotas', $data['mascota']);
+			$this->db->insert('mascotas', $data['mascota']);
+			$id_mascota = $this->db->query('select @@identity as id')->result()[0]->id;
+			
+		}
+		
 		$this->db->insert('historial', [
 			'fecha_entrada' => date('d/m/o'),
 			'id_mascota'	=> $id_mascota
@@ -133,6 +152,15 @@ class Modelo extends CI_Model {
 			->get();
 	}
 
+	public function getAllMascotas($idd)
+	{
+		return $this->db->select('mascotas.id, mascotas.nombre, mascotas.sexo, mascotas.edad, mascotas.tipo, mascotas.color, mascotas.raza, mascotas.vacunas, mascotas.resumen, mascotas.id_duenio, duenios.id as dueid, duenios.nombre as duename, duenios.apellido, duenios.cedula, duenios.telefono, duenios.direccion')
+					->from('mascotas')
+					->join('duenios', 'duenios.id = mascotas.id_duenio')
+			->where("mascotas.id_duenio", $idd)
+			->get();
+	}
+
 	public function actualizar($formdata, $id, $id_mascota, $tabla)
 	{
 		foreach ($formdata as $key => $value)
@@ -163,5 +191,10 @@ class Modelo extends CI_Model {
 	public function actualizarmsg($who)
 	{
 		$this->db->update('mensajes', [$who => 1]);
+	}
+
+	public function get_users($id)
+	{
+		return $this->db->get_where('usuarios', ['id' => $id]);
 	}
 }

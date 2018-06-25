@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 20-06-2018 a las 09:18:46
+-- Tiempo de generación: 25-06-2018 a las 17:57:29
 -- Versión del servidor: 5.7.22-0ubuntu18.04.1
 -- Versión de PHP: 7.1.11-0ubuntu0.17.10.1
 
@@ -44,11 +44,10 @@ CREATE TABLE `duenios` (
 --
 
 INSERT INTO `duenios` (`id`, `nombre`, `apellido`, `cedula`, `telefono`, `direccion`) VALUES
-(2, 'Jose Fernando', 'Lopez', '25887282', '04244444444', 'avenida los llanos calle oasis'),
-(3, 'Juan Fernando', 'Lopez', '250000000', '00000000000', 'avenida los mandarinas calle nicolas maduro'),
-(4, 'Iraida', 'Loepz', '10669419', '00000000000', 'asdsdas dasdasdsadasdsa das dsads dsadsadadsa'),
-(5, 'nueve', 'numeros', '9999999', '9999999999', 'asdsa dasd asdasdasdas das da'),
-(6, 'Ulises Antonio', 'Medrano', '27345678', '0444444441', 'la villa');
+(8, 'Enrique Miguel', 'López', '00000011', '0000000000', 'su casa'),
+(9, 'Jose Fernando', 'Lopez Ortiz', '25887282', '04243375169', 'Avenida los llanos calle oasis'),
+(10, 'kmk', 'mkmkm', '244141414', '112313123', 'kmkmkm'),
+(11, 'uiqyeiuqwyeiqwyeiqwy', 'ywquyeqiuwyeiqwyeiquwyei', '132131231', '21631263182', 'yeqiueyqwuieyqiweiqqyeiqwyeiqwyei byewquyeiqwye');
 
 -- --------------------------------------------------------
 
@@ -76,10 +75,10 @@ CREATE TABLE `historial` (
 --
 
 INSERT INTO `historial` (`id`, `fecha_entrada`, `fecha_salida`, `veterinario`, `pulso`, `peso`, `temperatura`, `actitud`, `cond_corporal`, `hidratacion`, `observacion`, `id_mascota`) VALUES
-(1, 'Sunday 17 June 2018 18:27:44', '20/06/2018', 'asdadveterinario nombre pedro', '9', '10', '23', 'Linfático', 'Caquéctico', '0-5%', 'esto es una pequeña observacion si', 2),
-(2, 'Sunday 17 June 2018 20:19:00', '20/06/2018', 'asdadveterinario nombre pedro', '9', '10', '23', 'Linfático', 'Caquéctico', '0-5%', 'esto es una pequeña observacion si', 3),
-(3, 'Sunday 17 June 2018 (20 - 1):4', '20/06/2018', 'asdadveterinario nombre pedro', '9', '10', '23', 'Linfático', 'Caquéctico', '0-5%', 'esto es una pequeña observacion si', 4),
-(5, 'Tuesday 19 June 2018 (01 - 1):', '20/06/2018', 'asdadveterinario nombre pedro', '9', '10', '23', 'Linfático', 'Caquéctico', '0-5%', 'esto es una pequeña observacion si', 6);
+(8, '25/06/2018', '25/06/2018', 'jose', '20', '10', '50', 'Apoplético', 'Obeso', '0-5%', 'it\'s dead', 9),
+(9, '25/06/2018', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10),
+(12, '25/06/2018', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13),
+(13, '25/06/2018', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14);
 
 -- --------------------------------------------------------
 
@@ -106,10 +105,10 @@ CREATE TABLE `mascotas` (
 --
 
 INSERT INTO `mascotas` (`id`, `nombre`, `sexo`, `edad`, `tipo`, `color`, `vacunas`, `raza`, `resumen`, `deAlta`, `id_duenio`) VALUES
-(2, 'Garfield', 'macho', '2', 'Gato', 'anaranjado con negro', 'rabia', 'specialcat', 'el gato se la pasa echado en algun sitio sin hacer nada y comiendo pasticho', 'true', 2),
-(3, 'pag', 'macho', '1', 'perro', 'negro', 'rabia, moquillo, saranpion', 'pug', 'le falta una pata', 'true', 3),
-(4, 'runner', 'macho', '4 años', 'dinosaurio', 'gris obscuro', '', 'velociraptor', 'ya no corre', 'true', 4),
-(6, 'eltigre', 'macho', '3', 'tigre', 'anaranjado con negro', 'rabia, otadas, asdasd, asd, asdas, das, dasdasd', 'bengala', 'lises es homosexual, y le hgustan los tigres. ', 'true', 6);
+(9, 'mascota 1', 'macho', '2', 'perro', 'marrón', 'vacuna1, vacuna2', 'bulldog', 'el animal esta caliente', 'true', 8),
+(10, 'bit', 'macho', '2', 'gato', 'gris', '', 'no se', 'tiene hambre', 'true', 9),
+(13, 'misifu', 'hembra', '4', 'gato', 'negro', '', 'gatoasd', 'adadasndjsan naindiasndisandisnisandiasndi nasndisajndias nisadniasndaisnd iasnd iasnisan isadnsai dsa dias disa dias dais dsadasid said dasdad', 'true', 9),
+(14, 'jerry', 'macho', '0.6', 'raton', 'gris', '', 'r4ton', 'bla bla bla bla bla bla bla bla bla bla', 'false', 9);
 
 -- --------------------------------------------------------
 
@@ -121,19 +120,10 @@ CREATE TABLE `mensajes` (
   `id` int(11) NOT NULL,
   `mensaje` text COLLATE utf8_spanish2_ci NOT NULL,
   `respuesta` text COLLATE utf8_spanish2_ci NOT NULL,
+  `visto_admin` tinyint(1) NOT NULL,
+  `visto_usuario` tinyint(1) NOT NULL,
   `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- Volcado de datos para la tabla `mensajes`
---
-
-INSERT INTO `mensajes` (`id`, `mensaje`, `respuesta`, `id_usuario`) VALUES
-(1, 'dfdfsdfsdfffsf dfsdfsjnlskdjsadjksajdsakl lkasjklasjsdlkasj dlkasjdlksjdlksjklas jdsdjldjlkjdlksjdlsj lkasjklasjlalss', 'respuistas', 2),
-(6, 'hoal soy gibert\r\n', 'hola gibert soy el veterinario.', 3),
-(7, 'hoal soy gibert\r\n', 'sadasdasdadsadasda', 3),
-(8, 'hola soy asdasdsad', 'adasdkjsakldjasjdasjldkjalsjdlaskdjaslkdjaslkdjalsjdlasjd', 2),
-(9, 'mensaje de prueba de parte de jose lopex\r\n', 'respueta de prueba de parte de l veterinario', 2);
 
 -- --------------------------------------------------------
 
@@ -158,8 +148,7 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `cedula`, `telefono`, `direccion`, `usuario`, `clave`) VALUES
 (1, 'admin', 'admin', '00000000', '00000000000', 'direccion de la clinica', 'admin', 'admin'),
-(2, 'Jose', 'Lopez', '25887282', '04144444444', 'mi casa', 'jose', 'jose'),
-(3, 'Gibert', 'Carrera', '23795320', '04144441111', 'Cagua', 'gibert', 'gibert');
+(5, 'Jose Fernando', 'Lopez Ortiz', '25887282', '04243375169', 'Avenida los llanos calle oasis', 'jose', 'jose');
 
 --
 -- Índices para tablas volcadas
@@ -206,31 +195,31 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `duenios`
 --
 ALTER TABLE `duenios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas

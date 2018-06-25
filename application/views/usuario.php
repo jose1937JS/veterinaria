@@ -43,11 +43,11 @@
 </nav>
 <!--/.Navbar-->
 
-<div class="card container"  style="margin-top: 100px">
-	<div class="card-body">
+<!-- <div class="card container"  style="margin-top: 100px"> -->
+	<div style="margin-top: 100px"></div>
 		<?php foreach ($mensajes->result() as $value): ?>
 			<div class="container">
-				<div class="card mb-4">
+				<div class="card mb-4 hoverable">
 					<div class="card-body">
 						<div class="d-flex justify-content-between">
                             <h5 class="card-title"><?= $value->nombre.' '.$value->apellido ?></h5>
@@ -63,8 +63,8 @@
 
 			</div>
 		<?php endforeach ?>
-	</div>
-</div>
+	<!-- </div> -->
+<!-- </div> -->
 
 
 <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

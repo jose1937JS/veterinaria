@@ -3,9 +3,9 @@
 /* Perfi para el cliente v/
  * Eliminar los mensajes v/
  * Notificacion cunado llega un mensaje v/
- * Que los datos del historial se guarden en la bd
- * Generar reporte pdf genera - Reporte por rango
+ * Que los datos del historial se guarden en la bd v/
  * QUe el cliente puda Aadir una mascota
+ * Generar reporte pdf genera - Reporte por rango
  *
 */
 
@@ -39,8 +39,10 @@ class AjaxController extends CI_Controller {
 
 	public function insertar()
 	{
+		$redirect = $this->input->post('redirect');
+
 		$this->modelo->insertar();
-		redirect('admin');
+		redirect($redirect);
 	}
 
 	public function editar_mascota($id)
@@ -58,6 +60,7 @@ class AjaxController extends CI_Controller {
 		$id_mascota = $this->input->post('id_mascota');
 
 		$this->modelo->actualizar($formdatamascota, $id, $id_mascota, 'mascotas');
+		redirect("informacion/$id");
 	}
 
 	public function editar_mascota_perfil($id)
@@ -115,11 +118,10 @@ class AjaxController extends CI_Controller {
 			$param = $this->input->post('search');
 
 			$result['mascotas'] = $this->modelo->buscar($param);
-
-			// var_dump($result['mascotas']->result());exit();
+			$cant['cant']	    = $this->modelo->get_cant_msg('visto_admin');
 
 			$this->load->view('includes/header');
-			$this->load->view('includes/navbar');
+			$this->load->view('includes/navbar', $cant);
 			$this->load->view('inicio', $result);
 			$this->load->view('includes/footer');
 		}
@@ -132,10 +134,14 @@ class AjaxController extends CI_Controller {
 	{
 		if ($this->session->userdata('usuario'))
 		{
-			$data['info'] = $this->modelo->perfil($id)->result();
+			$data['info']  = $this->modelo->perfil($id)->result();
+			$data['infor'] = $this->modelo->get_historial($id)->result();
+			$cant['cant']  = $this->modelo->get_cant_msg('visto_admin');
+
+			// var_dump($data['info']);exit();
 
 			$this->load->view('includes/header');
-			$this->load->view('includes/navbar');
+			$this->load->view('includes/navbar', $cant);
 			$this->load->view('perfil', $data);
 			$this->load->view('includes/footer');
 		}
@@ -209,12 +215,27 @@ class AjaxController extends CI_Controller {
 	
 		$this->modelo->historial($data);
 
+		redirect("informacion/$id");
+	}
+
+	public function pdf($id)
+	{
 		$infor['info'] = $this->modelo->get_historial($id)->result();
+		$this->db->update('mascotas', ['deAlta' => 'true']);
 
 		$this->load->view('includes/header');
 		$this->load->view('pdf', $infor);
 		$this->load->view('includes/footer');
 	}
+
+	// public function pdfGeneral()
+	// {
+	// 	$infor = $data['mascotas'] = $this->modelo->get_all();
+
+	// 	$this->load->view('includes/header');
+	// 	$this->load->view('pdfGeneral', $infor);
+	// 	$this->load->view('includes/footer');
+	// }
 
 	public function mensajes()
 	{
@@ -238,7 +259,7 @@ class AjaxController extends CI_Controller {
 	public function enviarmensaje()
 	{
 		$mensaje = [
-			'mensaje' => $this->input->post('msg'),
+			'mensaje'	 => $this->input->post('msg'),
 			'id_usuario' => $this->input->post('idusu')
 		];
 
@@ -258,12 +279,50 @@ class AjaxController extends CI_Controller {
 
 	public function perfil($id)
 	{
-		$data['info'] = $this->modelo->perfil($id)->result();
-		$data['id'] = $id;
 
-		$this->load->view('includes/header');
-		$this->load->view('perfilcliente', $data);
-		$this->load->view('includes/footer');
+		// var_dump($id);exit();
+
+		$data['info'] 	  = $this->modelo->perfil($id)->result();
+		$data['id']  	  = $id;
+
+		if ( !empty($data['info']) )
+		{
+			$this->load->view('includes/header');
+			$this->load->view('perfilcliente', $data);
+			$this->load->view('includes/footer');
+		}
+		else {
+
+ 			$d = $this->modelo->get_users($id)->result();
+			$dueid = $this->db->get_where('duenios', ['cedula' => $d[0]->cedula])->result()[0]->id;
+ 	
+ 			$data['mascotas'] = $this->modelo->getAllMascotas($dueid);
+
+			$data['info'] = [(object)[
+				'id' => $d[0]->id,
+				'nombre' => '',
+				'sexo' => '',
+				'edad' => '',
+				'tipo' => '',
+				'color' => '',
+				'raza' => '',
+				'vacunas' => '',
+				'resumen' => '',
+				'id_duenio' => '',
+				'dueid' => '',
+				'duename' => $d[0]->nombre,
+				'apellido' => $d[0]->apellido,
+				'cedula' => $d[0]->cedula,
+				'telefono' => $d[0]->telefono,
+				'direccion' => $d[0]->direccion
+ 			]];
+
+
+			$this->load->view('includes/header');
+			$this->load->view('perfilcliente', $data);
+			$this->load->view('includes/footer');
+		}
+		
 	}
 
 	function eliminar_mensajes_user($id)

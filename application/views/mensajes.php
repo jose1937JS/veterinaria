@@ -3,7 +3,7 @@
 <?php foreach ($mensajes->result() as $value): ?>
 	<div class="container">
 		
-		<div class="card mb-4">
+		<div class="card mb-4 hoverable">
 			<div class="card-body">
 				<div class="d-flex justify-content-between">
 					<h5 class="card-title"><?= $value->nombre.' '.$value->apellido ?><small> - Te ha ecrito un mensaje</small></h5>

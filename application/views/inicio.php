@@ -2,18 +2,31 @@
 	<div class="card mb-4 ">
 		<div class="card-body">
 			<div class="row d-flex justify-content-between" >
-				<div class="col-sm-12">
+				<div class="col-md-8">
 					<?= form_open('busqueda', 'class="md-form" id="buscarform"') ?>
 						<i class="fa fa-search prefix"></i>
 						<input type="text" name="search" id="search" class="form-control" data-toggle="tooltip" title="enter para enviar">
 						<label for="search">Filtrar por nombre de la mascota, especie, dueño, raza o cédula del dueño</label>
 					</form>
 				</div>
-				<!-- <div class="col-sm-2">
-					<button class="btn btn-danger mt-4" data-toggle="tooltip" title="Generar reporte PDF">
-						<i class="fa fa-file-pdf-o"></i>
-					</button>
-				</div> -->
+				<div class="col offset-2">
+					<button class="btn btn-primary" data-toggle="modal" data-target="#rangof"><i class="fa fa-file-pdf-o"></i></button>
+				</div>
+				
+				<div class="modal fade" id="rangof">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								adasdasdasd
+							</div>
+							<div class="modal-body">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur quam repellat fuga atque sequi. Quis, iste sequi provident sapiente omnis facere dignissimos quaerat eligendi. Voluptate odio quia accusamus iusto amet!
+								
+							</div>
+						</div>
+					</div>
+				</div>	
+			
 			</div>
 		</div>
 	</div>
@@ -64,6 +77,9 @@
                 </button>
             </div>
 	        <?= form_open('registrar', 'id="ingresar"') ?>
+
+				<input type="hidden" value="admin" name="redirect">
+
 	            <div class="modal-body mx-3">
 	            	<h4>Datos de la mascota</h4>
 	            	<div class="row">

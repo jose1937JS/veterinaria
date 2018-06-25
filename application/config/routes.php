@@ -67,6 +67,8 @@ $route['mensajes']						= 'AjaxController/mensajes';
 $route['aniadir_usuario']				= 'AjaxController/aniadir_usuario';
 $route['eliminar_mensaje/(:num)']		= 'AjaxController/eliminar_mensajes_user/$1';
 $route['eliminar_mensaje_admin/(:num)']	= 'AjaxController/eliminar_mensajes_admin/$1';
+$route['pdf/(:num)']					= 'AjaxController/pdf/$1';
+
 
 
 $route['404_override'] 					= '';

@@ -1,10 +1,10 @@
 <div class="container" style="margin-top: 100px">
-	<div class="card">
+	<div class="card hoverable">
 		<div class="card-body">
 			<div class="d-flex justify-content-between">
 				<h3>Información de la mascota</h3>
 				<button type="button" id="historialpdf" class="btn blue-gradient btn-rounded" data-toggle="modal" data-target="#exampleModal">
-					<i class="fa fa-file-pdf-o mr-2"></i> historial
+					historial
 				</button>
 			</div>
 			<br>
@@ -76,7 +76,7 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="d-flex justify-content-between">
-							<label for="color">Color:</label>
+							<label for="color" title="<?= $info[0]->color ?>">Color:</label>
 							<i class="fa fa-edit" data-toggle="tooltip" title="Editar" id="editcolor"></i>
 						</div>
 						<div class="input-group">
@@ -88,7 +88,7 @@
 					</div>
 					<div class="col">
 						<div class="d-flex justify-content-between">
-							<label for="vacuna">Vacunas:</label>
+							<label for="vacuna" title="<?php ($info[0]->vacunas === '')? print('No está vacunado') : print($info[0]->vacunas) ?>">Vacunas:</label>
 							<i class="fa fa-edit" data-toggle="tooltip" title="Editar" id="editvacunas"></i>
 						</div>
 						<div class="input-group">
@@ -115,7 +115,67 @@
 		</div>
 	</div>
 
-	<div class="card mt-4 mb-3">
+	<div class="card mt-4 px-3 hoverable">
+		<div class="card-body">
+			<div class="d-flex justify-content-between">
+				<h3>Información del Examen</h3>
+				<?= anchor("pdf/$id", '<i class="fa fa-file-pdf-o mr-2"></i> PDF' , 'class="btn blue-gradient btn-rounded"') ?>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col grey lighten-5 p-2 border">
+					CONSTANTES FISIOLOGICAS
+				</div>
+			</div>
+			<div class="row">
+				<div class="col p-2 border border-top-0">
+					<span class="font-weight-bold">PULSO: </span>
+					<?= $infor[0]->pulso ?> pulsaciones/min
+				</div>
+				<div class="col p-2 border border-top-0 border-left-0">
+					<span class="font-weight-bold">TEMPERATURA: </span>
+					<?= $infor[0]->temperatura ?> C°
+				</div>
+				<div class="col p-2 border border-top-0 border-left-0">
+					<span class="font-weight-bold">PESO: </span>
+					<?= $infor[0]->peso ?> Kg
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col grey lighten-5 p-2 border">
+					EXAMEN CLINICO
+				</div>
+			</div>
+			<div class="row">
+				<div class="col p-2 border border-top-0">
+					<span class="font-weight-bold">ACTITUD: </span>
+					<?= $infor[0]->actitud ?>
+				</div>
+				<div class="col p-2 border border-top-0 border-left-0">
+					<span class="font-weight-bold">CONDICION CORPORAL: </span>
+					<?= $infor[0]->cond_corporal ?>
+				</div>
+				<div class="col p-2 border border-top-0 border-left-0">
+					<span class="font-weight-bold">HIDRATACION: </span>
+					<?= $infor[0]->hidratacion ?>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col grey lighten-5 p-2 border">
+					OBSERVACION DEL VETERINARIO
+				</div>
+			</div>
+			<div class="row">
+				<div class="col p-2 border border-top-0">
+					<?= $infor[0]->observacion ?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card mt-4 mb-3 hoverable">
 		<div class="card-body">
 			<h3>Información del dueño de la mascota</h3>
 			<br>
@@ -123,7 +183,7 @@
 			<?= form_open("actualizar-duenio/$dueid") ?>
 				<div class="row">
 					<div class="col-sm-2">
-						<label for="ced">Cédula:</label>
+						<label for="ced" title="<?= $info[0]->cedula ?>">Cédula:</label>
 						<div class="input-group">
 							<div class="input-group-prepend">
 								<div class="input-group-text"><i class="prefix fa fa-id-card"></i></div>
@@ -314,7 +374,7 @@
 	            
 	            </div>
 	            <div class="modal-footer">
-	                <button class="btn btn-primary" type="submit">PDF</button>
+	                <button class="btn btn-primary" type="submit">guardar</button>
 	            </div>
 	        </form>
         </div>
