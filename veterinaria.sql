@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-06-2018 a las 17:57:29
+-- Tiempo de generación: 26-06-2018 a las 13:20:50
 -- Versión del servidor: 5.7.22-0ubuntu18.04.1
 -- Versión de PHP: 7.1.11-0ubuntu0.17.10.1
 
@@ -45,9 +45,13 @@ CREATE TABLE `duenios` (
 
 INSERT INTO `duenios` (`id`, `nombre`, `apellido`, `cedula`, `telefono`, `direccion`) VALUES
 (8, 'Enrique Miguel', 'López', '00000011', '0000000000', 'su casa'),
-(9, 'Jose Fernando', 'Lopez Ortiz', '25887282', '04243375169', 'Avenida los llanos calle oasis'),
+(9, 'José Fernando', 'López Ortiz', '25887282', '04243375169', 'Avenida los llanos calle oasis'),
 (10, 'kmk', 'mkmkm', '244141414', '112313123', 'kmkmkm'),
-(11, 'uiqyeiuqwyeiqwyeiqwy', 'ywquyeqiuwyeiqwyeiquwyei', '132131231', '21631263182', 'yeqiueyqwuieyqiweiqqyeiqwyeiqwyei byewquyeiqwye');
+(11, 'uiqyeiuqwyeiqwyeiqwy', 'ywquyeqiuwyeiqwyeiquwyei', '132131231', '21631263182', 'yeqiueyqwuieyqiweiqqyeiqwyeiqwyei byewquyeiqwye'),
+(12, 'ugo Ratael', 'Chiabes Frias', '1000000', '0414111111', 'miraglores'),
+(13, 'Iraida', 'Lopez', '10669419', '04144441141', 'su casa'),
+(14, 'Gibert', 'Carrera Morey', '23795320', '04164376667', 'Cagua la haciendita'),
+(15, 'Julio', 'Yánez', '26062083', '0555555551', 'la victoria');
 
 -- --------------------------------------------------------
 
@@ -75,10 +79,9 @@ CREATE TABLE `historial` (
 --
 
 INSERT INTO `historial` (`id`, `fecha_entrada`, `fecha_salida`, `veterinario`, `pulso`, `peso`, `temperatura`, `actitud`, `cond_corporal`, `hidratacion`, `observacion`, `id_mascota`) VALUES
-(8, '25/06/2018', '25/06/2018', 'jose', '20', '10', '50', 'Apoplético', 'Obeso', '0-5%', 'it\'s dead', 9),
-(9, '25/06/2018', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10),
-(12, '25/06/2018', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13),
-(13, '25/06/2018', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14);
+(17, '26/06/2018', '26/06/2018', 'jose', '90', '3', '40', 'Asténico', 'Normal', '0-5%', 'esta grave, hay q aplicarle una cirugia reconstructiva en el ojo y en la cola', 18),
+(18, '26/06/2018', '26/06/2018', 'jose', '90', '3', '40', 'Asténico', 'Normal', '0-5%', 'esta grave, hay q aplicarle una cirugia reconstructiva en el ojo y en la cola', 19),
+(19, '26/06/2018', '26/06/2018', 'maduto', '90', '19', '10', 'Asténico', 'Caquéctico', 'Normal', 'is dead', 20);
 
 -- --------------------------------------------------------
 
@@ -105,10 +108,9 @@ CREATE TABLE `mascotas` (
 --
 
 INSERT INTO `mascotas` (`id`, `nombre`, `sexo`, `edad`, `tipo`, `color`, `vacunas`, `raza`, `resumen`, `deAlta`, `id_duenio`) VALUES
-(9, 'mascota 1', 'macho', '2', 'perro', 'marrón', 'vacuna1, vacuna2', 'bulldog', 'el animal esta caliente', 'true', 8),
-(10, 'bit', 'macho', '2', 'gato', 'gris', '', 'no se', 'tiene hambre', 'true', 9),
-(13, 'misifu', 'hembra', '4', 'gato', 'negro', '', 'gatoasd', 'adadasndjsan naindiasndisandisnisandiasndi nasndisajndias nisadniasndaisnd iasnd iasnisan isadnsai dsa dias disa dias dais dsadasid said dasdad', 'true', 9),
-(14, 'jerry', 'macho', '0.6', 'raton', 'gris', '', 'r4ton', 'bla bla bla bla bla bla bla bla bla bla', 'false', 9);
+(18, 'bit', 'hembra', '2', 'gato', 'negro', '', 'ñaa', 'blablabla blablablabla blablabla blabla bla bla bla bla bla bla bla', 'false', 14),
+(19, 'misifu', 'macho', '10', 'gato', 'gris', 'no, tiene, vacuna, se va a moir', 'asdad', 'sdjasjaklsjdlkasjdlasjdlasjdasljd', 'true', 14),
+(20, 'lucky', 'macho', '2', 'perro', 'gris, blanco, negro', 'rabia, todas, las, demas, esta, al, dia', 'lobo siberiano', 'esta verde', 'true', 15);
 
 -- --------------------------------------------------------
 
@@ -124,6 +126,13 @@ CREATE TABLE `mensajes` (
   `visto_usuario` tinyint(1) NOT NULL,
   `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `mensajes`
+--
+
+INSERT INTO `mensajes` (`id`, `mensaje`, `respuesta`, `visto_admin`, `visto_usuario`, `id_usuario`) VALUES
+(21, 'ola como stas ?', 'bien y tu ?', 1, 1, 7);
 
 -- --------------------------------------------------------
 
@@ -148,7 +157,9 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `cedula`, `telefono`, `direccion`, `usuario`, `clave`) VALUES
 (1, 'admin', 'admin', '00000000', '00000000000', 'direccion de la clinica', 'admin', 'admin'),
-(5, 'Jose Fernando', 'Lopez Ortiz', '25887282', '04243375169', 'Avenida los llanos calle oasis', 'jose', 'jose');
+(5, 'José Fernando', 'López Ortiz', '25887282', '04243375169', 'Avenida los llanos calle oasis', 'jose', 'jose'),
+(6, 'Iraida', 'Lopez', '10669419', '04144441141', 'su casa', 'iraida', 'lopez'),
+(7, 'Gibert', 'Carrera Morey', '23795320', '04164376667', 'Cagua la haciendita', 'giber', 'giber');
 
 --
 -- Índices para tablas volcadas
@@ -195,31 +206,31 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `duenios`
 --
 ALTER TABLE `duenios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `historial`
 --
 ALTER TABLE `historial`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `mascotas`
 --
 ALTER TABLE `mascotas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `mensajes`
 --
 ALTER TABLE `mensajes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas
