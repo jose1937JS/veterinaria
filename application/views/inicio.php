@@ -2,7 +2,7 @@
 	<div class="card mb-4 ">
 		<div class="card-body">
 			<div class="row d-flex justify-content-between" >
-				<div class="col-md-8">
+				<div class="col-md-8 searchpanel">
 					<?= form_open('busqueda', 'class="md-form" id="buscarform"') ?>
 						<i class="fa fa-search prefix"></i>
 						<input type="text" name="search" id="search" class="form-control" data-toggle="tooltip" title="enter para enviar">
@@ -14,15 +14,34 @@
 				</div>
 				
 				<div class="modal fade" id="rangof">
-					<div class="modal-dialog">
+					<div class="modal-dialog modal-lg modal-dialog-centered">
 						<div class="modal-content">
 							<div class="modal-header">
-								adasdasdasd
+								<h3>Selecciona un rango de fechas.</h3>
 							</div>
-							<div class="modal-body">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur quam repellat fuga atque sequi. Quis, iste sequi provident sapiente omnis facere dignissimos quaerat eligendi. Voluptate odio quia accusamus iusto amet!
-								
-							</div>
+							<?= form_open('AjaxController/pdfgeneral') ?>
+								<div class="modal-body">
+
+									<div class="row">
+										<div class="col-md-6 mb-4">
+											<div class="md-form">
+												<input placeholder="Selected starting date" type="text" id="startingDate" class="form-control datepicker" name="fechain" required>
+												<label for="startingDate">start</label>
+											</div>
+										</div>
+										<div class="col-md-6 mb-4">
+											<div class="md-form">
+												<input placeholder="Selected ending date" type="text" id="endingDate" class="form-control datepicker" name="fechaout">
+												<label for="endingDate">end</label>
+											</div>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="submit" class="btn btn-primary">PDF</button>
+									</div>
+
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>	
@@ -42,7 +61,7 @@
 						<th>COLOR</th>
 						<th>DUEÑO</th>
 						<th>TELEFONO</th>
-						<th class="text-center">ACCIONES</th>
+						<th class="text-center b">ACCIONES</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -55,7 +74,7 @@
 							<td class="font-weight-normal"><?= $v->color ?></td>
 							<td class="font-weight-normal"><?= $v->duename ?> <?= $v->apellido ?></td>
 							<td class="font-weight-normal"><?= $v->telefono ?></td>
-							<td class="text-center">
+							<td class="text-center b">
 								<?= anchor("informacion/$v->id","<i class='fa fa-info'></i>", 'class="btn btn-info px-3 py-2" data-toggle="tooltip" title="Información"') ?>
 								<?= anchor("eliminar/$v->id","<i class='fa fa-trash'></i>", 'class="btn btn-danger px-3 py-2" data-toggle="tooltip" title="Eliminar"') ?>
 							</td>

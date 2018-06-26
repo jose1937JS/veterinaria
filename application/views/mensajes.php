@@ -1,5 +1,7 @@
 <div style="margin-top: 100px"></div>
-
+<?php if ( empty($mensajes->result()) ): ?>
+    <h1 class="text-center">No hay mensajes para mostrar.</h1>
+<?php endif ?>
 <?php foreach ($mensajes->result() as $value): ?>
 	<div class="container">
 		

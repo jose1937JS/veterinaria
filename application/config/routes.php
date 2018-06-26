@@ -70,6 +70,5 @@ $route['eliminar_mensaje_admin/(:num)']	= 'AjaxController/eliminar_mensajes_admi
 $route['pdf/(:num)']					= 'AjaxController/pdf/$1';
 
 
-
 $route['404_override'] 					= '';
 $route['translate_uri_dashes']  		= FALSE;

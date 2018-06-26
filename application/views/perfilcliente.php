@@ -12,32 +12,32 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 
-<!-- Collapsible content -->
-<div class="collapse navbar-collapse" id="basicExampleNav">
+	<!-- Collapsible content -->
+	<div class="collapse navbar-collapse" id="basicExampleNav">
 
-	<!-- Links -->
-	<ul class="navbar-nav ml-auto">
-		<li class="nav-item">
-			<?= anchor('usuario', '<i class="fa fa-home"></i> Usuario', 'class="nav-link"') ?>
-		</li>
+		<!-- Links -->
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item">
+				<?= anchor('usuario', '<i class="fa fa-home"></i> Usuario', 'class="nav-link"') ?>
+			</li>
 
-		<li class="nav-item">
-			<?= anchor("usuario/perfil/$id", '<i class="fa fa-home"></i> Perfil', 'class="nav-link"') ?>
-		</li>
+			<li class="nav-item">
+				<?= anchor("usuario/perfil/$id", '<i class="fa fa-home"></i> Perfil', 'class="nav-link"') ?>
+			</li>
 
-		<!-- Dropdown -->
-		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">sesion</a>
-			<div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-				<?= anchor('Login/logout', 'Cerrar Sesión', 'class="dropdown-item"') ?>
-			</div>
-		</li>
+			<!-- Dropdown -->
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">sesion</a>
+				<div class="dropdown-menu dropdown-menu-right dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+					<?= anchor('Login/logout', 'Cerrar Sesión', 'class="dropdown-item"') ?>
+				</div>
+			</li>
 
-	</ul>
-	<!-- Links -->
+		</ul>
+		<!-- Links -->
 
-</div>
-<!-- Collapsible content -->
+	</div>
+	<!-- Collapsible content -->
 
 </nav>
 <!--/.Navbar-->
@@ -50,6 +50,9 @@
 			<br>
 			<?php $dueid = $info[0]->dueid ?>
 			<?= form_open("actualizar_duenio/$dueid") ?>
+	
+				<input type="hidden" name="tabla" value="usuarios">
+			
 				<div class="row">
 					<div class="col-sm-2">
 						<label for="ced" title="<?= $info[0]->cedula ?>">Cédula:</label>
@@ -230,31 +233,35 @@
 </div>
 
 
-<?php var_dump($mascotas->result()) ?>
-
 <div class="container card mb-4 hoverable">
 	<h3 class="my-4 font-weight-normal">Mascotas</h3>
 	<!--Accordion wrapper-->
 	<div class="accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
 
-		<?php foreach ($mascotas->result() as $value): ?>
+		<?php foreach ($mascotas->result() as $key => $value): ?>
 			<div class="card">
 				<div class="card-header" role="tab" id="headingTwo">
-					<a class="collapsed" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-						<h5 class="mb-0">
-							<?= $value->nombre ?> <i class="fa fa-angle-down rotate-icon"></i>
-						</h5>
+					<a class="collapsed" data-toggle="collapse" href="#<?= $key ?>" aria-expanded="false" aria-controls="<?= $key ?>">
+						<div class="row">
+							<h5 class="d-inline col black-text"><span class="font-weight-normal">Nombre:</span> <?= $value->nombre ?></h5>
+							<h5 class="d-inline col black-text"><span class="font-weight-normal">Especie:</span> <?= $value->tipo ?></h5>
+							<h5 class="d-inline col black-text"><span class="font-weight-normal">Raza:</span> <?= $value->raza ?> </h5>
+							<i class="fa fa-angle-down rotate-icon"></i>
+						</div>
 					</a>
 				</div>
 
-				<div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordionEx" >
-					<div class="card-body">
-						Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute,
-						non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
-						moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch
-						et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-						Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
-						synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+				<div id="<?= $key ?>" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordionEx" >
+					<div class="card-body" style="font-size: 15px">
+						<div class="row">
+							<div class="mb-3 col"><span class="font-weight-normal">Sexo: </span><?= $value->sexo ?></div>
+							<div class="mb-3 col"><span class="font-weight-normal">Edad: </span><?= $value->edad ?></div>
+							<div class="mb-3 col"><span class="font-weight-normal">Color: </span><?= $value->color ?></div>
+						</div>
+						<div class="row">
+							<div class="mb-3 col-sm-4"><span class="font-weight-normal">Vacunas: </span><?= $value->vacunas ?></div>
+							<div class="col"><span class="font-weight-normal">Resumen: </span><?= $value->resumen ?></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -275,7 +282,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<?= form_open('registrar') ?>
+			<?= form_open('registrar', "id='ingresar'") ?>
 
 				<input type="hidden" name="nombre"    value="<?= $info[0]->duename   ?>">
 				<input type="hidden" name="apellido"  value="<?= $info[0]->apellido  ?>">

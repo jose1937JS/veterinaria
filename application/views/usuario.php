@@ -45,7 +45,10 @@
 
 <!-- <div class="card container"  style="margin-top: 100px"> -->
 	<div style="margin-top: 100px"></div>
-		<?php foreach ($mensajes->result() as $value): ?>
+		<?php if ( empty($mensajes->result()) ): ?>
+            <h1 class="text-center">No hay mensajes para mostrar.</h1>
+        <?php endif ?>
+        <?php foreach ($mensajes->result() as $value): ?>
 			<div class="container">
 				<div class="card mb-4 hoverable">
 					<div class="card-body">

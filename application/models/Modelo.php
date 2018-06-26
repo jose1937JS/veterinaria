@@ -124,8 +124,9 @@ class Modelo extends CI_Model {
 		$this->db->insert('usuarios', $data);
 	}
 
-	public function historial($data)
+	public function historial($data, $id_mascota)
 	{
+		$this->db->where('id_mascota', $id_mascota);
 		$this->db->update('historial', $data);
 	}
 
@@ -161,7 +162,7 @@ class Modelo extends CI_Model {
 			->get();
 	}
 
-	public function actualizar($formdata, $id, $id_mascota, $tabla)
+	public function actualizar($formdata, $id, $tabla)
 	{
 		foreach ($formdata as $key => $value)
 			if (empty($value)) unset($formdata[$key]);
@@ -172,7 +173,6 @@ class Modelo extends CI_Model {
 		{
 			$this->db->where('id', $id);
 			$this->db->update($tabla, $formdata);
-			
 		}
 	}
 
@@ -185,7 +185,6 @@ class Modelo extends CI_Model {
 	{
 		$num = $this->db->query("SELECT COUNT(*) as num FROM mensajes WHERE $who = 0");
 		return $num->result()[0]->num;
-		// return $this->db->where($who, '0')->count_all_results('mensajes');
 	}
 
 	public function actualizarmsg($who)
@@ -196,5 +195,18 @@ class Modelo extends CI_Model {
 	public function get_users($id)
 	{
 		return $this->db->get_where('usuarios', ['id' => $id]);
+	}
+
+	public function rangofechapdf($fechain, $fechaout)
+	{
+		empty($fechaout)? $fechaout = date('d/m/o') : $fechaout = $fechaout; 
+
+		return $this->db->select('mascotas.id as mascoid, mascotas.nombre, mascotas.deAlta, mascotas.sexo, mascotas.edad, mascotas.tipo, mascotas.color, mascotas.vacunas, mascotas.raza, mascotas.resumen, mascotas.id_duenio, duenios.id as dueid, duenios.nombre as duename, duenios.apellido, duenios.cedula, duenios.telefono, duenios.direccion, historial.id as histoid, historial.fecha_entrada, historial.fecha_salida, historial.veterinario, historial.pulso, historial.peso, historial.temperatura, historial.actitud, historial.cond_corporal, historial.hidratacion, historial.observacion')
+					->from('mascotas')
+					->join('historial', 'historial.id_mascota = mascotas.id')
+					->join('duenios', 'duenios.id = mascotas.id_duenio')
+					->where('fecha_entrada >=', $fechain)
+					->where('fecha_salida <=', $fechaout)
+					->get();
 	}
 }

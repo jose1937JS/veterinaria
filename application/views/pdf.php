@@ -173,6 +173,9 @@
 	<script>
 		$(function(){
 			print()
+			setInterval(function(){
+				history.back()
+			}, 1000)
 		})
 	</script>
 </body>
